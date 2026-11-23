@@ -4,7 +4,11 @@
   "description": "A standalone desktop DLP application for detecting sensitive content in prompts and file uploads to GenAI platforms.",
   "main": "dist/main/main.js",
   "scripts": {
+<<<<<<< HEAD
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.renderer.json",
+=======
+    "build": "tsc",
+>>>>>>> origin/main
     "start": "npm run build && electron ."
   },
   "repository": {

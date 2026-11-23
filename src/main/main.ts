@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { app, BrowserWindow, ipcMain } from "electron";
+=======
+import { app, BrowserWindow } from "electron";
+>>>>>>> origin/main
 import path from "path";
 
 function createWindow(): void {
@@ -17,6 +21,7 @@ function createWindow(): void {
     );
 }
 
+<<<<<<< HEAD
 ipcMain.on("open-platform", (_event, platform: string) => {
     let url = "";
 
@@ -40,6 +45,8 @@ ipcMain.on("open-platform", (_event, platform: string) => {
     browserWindow.loadURL(url);
 });
 
+=======
+>>>>>>> origin/main
 app.whenReady().then(() => {
     createWindow();
 
