@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 
 function createWindow(): void {
@@ -16,6 +16,29 @@ function createWindow(): void {
         path.join(__dirname, "../../src/renderer/index.html")
     );
 }
+
+ipcMain.on("open-platform", (_event, platform: string) => {
+    let url = "";
+
+    if (platform === "chatgpt") {
+        url = "https://chatgpt.com";
+    } else if (platform === "perplexity") {
+        url = "https://www.perplexity.ai";
+    }
+
+    if (!url) return;
+
+    const browserWindow = new BrowserWindow({
+        width: 1400,
+        height: 900,
+        webPreferences: {
+            contextIsolation: true,
+            nodeIntegration: false,
+        },
+    });
+
+    browserWindow.loadURL(url);
+});
 
 app.whenReady().then(() => {
     createWindow();
