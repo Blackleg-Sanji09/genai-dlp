@@ -19,11 +19,7 @@ contextBridge.exposeInMainWorld("dlp", {
 });
 
 // Shared interception logic for both platforms
-function installDLPInterception(
-    platform: string,
-    composerSelector: string,
-    sendSelector: string
-) {
+function installDLPInterception(platform: string, composerSelector: string, sendSelector: string) {
     let checking = false;
 
     document.addEventListener(
@@ -36,9 +32,7 @@ function installDLPInterception(
                 return;
             }
 
-            const composer = document.querySelector(
-                composerSelector
-            ) as HTMLElement | null;
+            const composer = document.querySelector(composerSelector) as HTMLElement | null;
 
             const prompt = composer?.innerText?.trim() ?? "";
 
@@ -57,10 +51,7 @@ function installDLPInterception(
             try {
                 console.log(`DLP: Sensitive prompt detected on ${platform}.`);
 
-                const allowed = await ipcRenderer.invoke(
-                    "check-sensitive-content",
-                    prompt
-                );
+                const allowed = await ipcRenderer.invoke("check-sensitive-content", prompt);
 
                 if (allowed) {
                     console.log(`DLP: User chose Continue on ${platform}.`);
@@ -76,7 +67,7 @@ function installDLPInterception(
                 checking = false;
             }
         },
-        true
+        true,
     );
 
     console.log(`GenAI DLP ${platform} interception initialized.`);
@@ -87,7 +78,7 @@ if (location.hostname.includes("chatgpt.com")) {
     installDLPInterception(
         "ChatGPT",
         '[contenteditable="true"][aria-label="Ask ChatGPT"]',
-        'button[aria-label="Send"]'
+        'button[aria-label="Send"]',
     );
 }
 
@@ -96,7 +87,7 @@ if (location.hostname.includes("perplexity.ai")) {
     installDLPInterception(
         "Perplexity",
         '[contenteditable="true"][aria-label="Ask a follow-up"]',
-        'button[aria-label="Submit"]'
+        'button[aria-label="Submit"]',
     );
 }
 
@@ -133,9 +124,7 @@ function installFileUploadInterception(platform: string) {
 
             processing = true;
 
-            console.log(
-                `DLP: Inspecting ${files.length} file(s) on ${platform}.`
-            );
+            console.log(`DLP: Inspecting ${files.length} file(s) on ${platform}.`);
 
             let blocked = false;
 
@@ -147,23 +136,14 @@ function installFileUploadInterception(platform: string) {
                     try {
                         // Image OCR
                         if (file.type.startsWith("image/")) {
-                            console.log(
-                                `DLP: Running OCR on ${file.name}.`
-                            );
+                            console.log(`DLP: Running OCR on ${file.name}.`);
 
-                            const imageData = new Uint8Array(
-                                await file.arrayBuffer()
-                            );
+                            const imageData = new Uint8Array(await file.arrayBuffer());
 
-                            const result = await ipcRenderer.invoke(
-                                "scan-image-ocr",
-                                imageData
-                            );
+                            const result = await ipcRenderer.invoke("scan-image-ocr", imageData);
 
                             if (!result.success) {
-                                console.error(
-                                    `DLP: OCR failed for ${file.name}.`
-                                );
+                                console.error(`DLP: OCR failed for ${file.name}.`);
 
                                 blocked = true;
                                 break;
@@ -177,23 +157,14 @@ function installFileUploadInterception(platform: string) {
                             file.type === "application/pdf" ||
                             file.name.toLowerCase().endsWith(".pdf")
                         ) {
-                            console.log(
-                                `DLP: Extracting text from PDF ${file.name}.`
-                            );
+                            console.log(`DLP: Extracting text from PDF ${file.name}.`);
 
-                            const pdfData = new Uint8Array(
-                                await file.arrayBuffer()
-                            );
+                            const pdfData = new Uint8Array(await file.arrayBuffer());
 
-                            const result = await ipcRenderer.invoke(
-                                "scan-pdf",
-                                pdfData
-                            );
+                            const result = await ipcRenderer.invoke("scan-pdf", pdfData);
 
                             if (!result.success) {
-                                console.error(
-                                    `DLP: PDF scanning failed for ${file.name}.`
-                                );
+                                console.error(`DLP: PDF scanning failed for ${file.name}.`);
 
                                 // Fail closed if PDF extraction fails.
                                 blocked = true;
@@ -207,42 +178,31 @@ function installFileUploadInterception(platform: string) {
                         else {
                             extractedText = await file.text();
 
-                            detected = extractedText.includes(
-                                "WALLED_SENSITIVE"
-                            );
+                            detected = extractedText.includes("WALLED_SENSITIVE");
                         }
 
                         if (!detected) {
                             continue;
                         }
 
-                        console.log(
-                            `DLP: Sensitive content detected in ${file.name}.`
-                        );
+                        console.log(`DLP: Sensitive content detected in ${file.name}.`);
 
                         const allowed = await ipcRenderer.invoke(
                             "check-sensitive-content",
-                            `Sensitive content detected in uploaded file:\n\nFile: ${file.name}\n\nExtracted content:\n${extractedText}`
+                            `Sensitive content detected in uploaded file:\n\nFile: ${file.name}\n\nExtracted content:\n${extractedText}`,
                         );
 
                         if (!allowed) {
                             blocked = true;
 
-                            console.log(
-                                `DLP: Upload blocked for ${file.name}.`
-                            );
+                            console.log(`DLP: Upload blocked for ${file.name}.`);
 
                             break;
                         }
 
-                        console.log(
-                            `DLP: User approved ${file.name}.`
-                        );
+                        console.log(`DLP: User approved ${file.name}.`);
                     } catch (error) {
-                        console.error(
-                            `DLP: Failed to inspect file ${file.name}:`,
-                            error
-                        );
+                        console.error(`DLP: Failed to inspect file ${file.name}:`, error);
 
                         // Fail closed if inspection fails.
                         blocked = true;
@@ -256,9 +216,7 @@ function installFileUploadInterception(platform: string) {
             if (blocked) {
                 target.value = "";
 
-                console.log(
-                    `DLP: File selection blocked on ${platform}.`
-                );
+                console.log(`DLP: File selection blocked on ${platform}.`);
 
                 return;
             }
@@ -270,10 +228,10 @@ function installFileUploadInterception(platform: string) {
             target.dispatchEvent(
                 new Event("change", {
                     bubbles: true,
-                })
+                }),
             );
         },
-        true
+        true,
     );
 }
 
@@ -291,16 +249,14 @@ function installResponseColorChange(platform: string) {
     const applyColor = () => {
         if (platform === "ChatGPT") {
             const responses = document.querySelectorAll<HTMLElement>(
-                '[data-markdown-text-style="assistant-message"]'
+                '[data-markdown-text-style="assistant-message"]',
             );
 
             responses.forEach((response) => {
                 response.style.setProperty("color", "#00BFFF", "important");
             });
         } else {
-            const responses = document.querySelectorAll<HTMLElement>(
-                '.prose, [class*="answer"]'
-            );
+            const responses = document.querySelectorAll<HTMLElement>('.prose, [class*="answer"]');
 
             responses.forEach((response) => {
                 response.style.setProperty("color", "#00BFFF", "important");
@@ -320,9 +276,7 @@ function installResponseColorChange(platform: string) {
             subtree: true,
         });
 
-        console.log(
-            `GenAI DLP: Response color modification initialized for ${platform}.`
-        );
+        console.log(`GenAI DLP: Response color modification initialized for ${platform}.`);
     };
 
     if (document.body) {

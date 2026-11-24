@@ -119,9 +119,7 @@ function createWindow(): void {
         },
     });
 
-    mainWindow.loadFile(
-        path.join(__dirname, "../../src/renderer/index.html")
-    );
+    mainWindow.loadFile(path.join(__dirname, "../../src/renderer/index.html"));
 }
 
 ipcMain.on("open-platform", (_event, platform: string) => {
@@ -144,8 +142,6 @@ ipcMain.on("open-platform", (_event, platform: string) => {
             nodeIntegration: false,
         },
     });
-
-    browserWindow.webContents.openDevTools();
 
     browserWindow.loadURL(url);
 });

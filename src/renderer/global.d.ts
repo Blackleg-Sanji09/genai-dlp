@@ -1,9 +1,9 @@
 export {};
 
 declare global {
-  interface Window {
-    dlp: {
-      openPlatform: (platform: string) => void;
-    };
-  }
+    interface Window {
+        dlp: {
+            openPlatform: (platform: string) => void;
+        };
+    }
 }

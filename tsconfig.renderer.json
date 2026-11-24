@@ -1,15 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ES2022",
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "skipLibCheck": true,
-    "outDir": "dist/renderer",
-    "rootDir": "src/renderer"
-  },
-  "include": [
-    "src/renderer/renderer.ts",
-    "src/renderer/global.d.ts"
-  ]
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
+        "strict": true,
+        "skipLibCheck": true,
+        "outDir": "dist/renderer",
+        "rootDir": "src/renderer"
+    },
+    "include": ["src/renderer/renderer.ts", "src/renderer/global.d.ts"]
 }
