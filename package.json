@@ -1,30 +1,32 @@
 {
-  "name": "genai-dlp",
-  "version": "1.0.0",
-  "description": "A standalone desktop DLP application for detecting sensitive content in prompts and file uploads to GenAI platforms.",
-  "main": "dist/main/main.js",
-  "scripts": {
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.renderer.json",
-    "start": "npm run build && electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Blackleg-Sanji09/genai-dlp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Blackleg-Sanji09/genai-dlp/issues"
-  },
-  "homepage": "https://github.com/Blackleg-Sanji09/genai-dlp#readme",
-  "dependencies": {
-    "electron": "^45.4.1",
-    "pdf-parse": "^2.4.5"
-  },
-  "devDependencies": {
-    "@types/node": "^26.6.6",
-    "typescript": "^7.0.2"
-  }
+    "name": "genai-dlp",
+    "version": "1.0.0",
+    "description": "A standalone desktop DLP application for detecting sensitive content in prompts and file uploads to GenAI platforms.",
+    "main": "dist/main/main.js",
+    "scripts": {
+        "build": "tsc -p tsconfig.json && tsc -p tsconfig.renderer.json",
+        "start": "npm run build && electron .",
+        "test": "vitest run"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Blackleg-Sanji09/genai-dlp.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/Blackleg-Sanji09/genai-dlp/issues"
+    },
+    "homepage": "https://github.com/Blackleg-Sanji09/genai-dlp#readme",
+    "dependencies": {
+        "electron": "^45.4.1",
+        "pdf-parse": "^2.4.5"
+    },
+    "devDependencies": {
+        "@types/node": "^26.6.6",
+        "typescript": "^7.0.2",
+        "vitest": "^5.1.1"
+    }
 }

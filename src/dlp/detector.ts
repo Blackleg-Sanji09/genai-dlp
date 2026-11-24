@@ -10,14 +10,12 @@ export function containsSensitiveMarker(text: string): boolean {
 }
 
 export async function scanImageForSensitiveMarker(
-    imagePath: string
+    imagePath: string,
 ): Promise<{ detected: boolean; extractedText: string }> {
     try {
-        const { stdout } = await execFileAsync(
-            "tesseract",
-            [imagePath, "stdout"],
-            { timeout: 15000 }
-        );
+        const { stdout } = await execFileAsync("tesseract", [imagePath, "stdout"], {
+            timeout: 15000,
+        });
 
         const extractedText = stdout.trim();
 

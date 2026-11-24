@@ -1,100 +1,102 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #1f2937;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
 }
 
 .app {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 40px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .header h1 {
-  margin: 0;
-  font-size: 28px;
+    margin: 0;
+    font-size: 28px;
 }
 
 .header p {
-  margin: 8px 0 0;
-  color: #6b7280;
+    margin: 8px 0 0;
+    color: #6b7280;
 }
 
 .status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #15803d;
-  font-size: 14px;
-  font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #15803d;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .status-dot {
-  width: 10px;
-  height: 10px;
-  background: #22c55e;
-  border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
 }
 
 .content {
-  padding: 40px;
+    padding: 40px;
 }
 
 .content h2 {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-  color: #6b7280;
-  margin-bottom: 30px;
+    color: #6b7280;
+    margin-bottom: 30px;
 }
 
 .platforms {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .platform-card {
-  width: 300px;
-  padding: 25px;
-  text-align: left;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+    width: 300px;
+    padding: 25px;
+    text-align: left;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
 .platform-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .platform-card h3 {
-  margin-top: 0;
-  font-size: 20px;
+    margin-top: 0;
+    font-size: 20px;
 }
 
 .platform-card p {
-  color: #6b7280;
-  line-height: 1.5;
+    color: #6b7280;
+    line-height: 1.5;
 }
 
 .platform-card span {
-  display: inline-block;
-  margin-top: 15px;
-  color: #2563eb;
-  font-weight: 600;
+    display: inline-block;
+    margin-top: 15px;
+    color: #2563eb;
+    font-weight: 600;
 }
