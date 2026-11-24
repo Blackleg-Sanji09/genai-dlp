@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/Blackleg-Sanji09/genai-dlp#readme",
   "dependencies": {
-    "electron": "^45.4.1"
+    "electron": "^45.4.1",
+    "pdf-parse": "^2.4.5"
   },
   "devDependencies": {
     "@types/node": "^26.6.6",
